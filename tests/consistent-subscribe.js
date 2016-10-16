@@ -10,6 +10,21 @@ ruleTester.run('consistent-subscribe', rule, {
             function onClick() {}
             document.addEventListener('click', onClick);
             document.removeEventListener('click', onClick);
+        `,
+        `
+            function onClick() {}
+            $('body').on('click', onClick);
+            $('body').off('click', onClick);
+        `,
+        // fixed crashes
+        `
+            (function() {})();
+        `,
+        `
+            foo.bar()();
+        `,
+        `
+            foo.toString()
         `
     ],
     invalid: [
@@ -19,6 +34,6 @@ ruleTester.run('consistent-subscribe', rule, {
                 document.addEventListener('click', onClick);
             `,
             errors: [{message: 'unpaired addEventListener', type: 'CallExpression'}]
-        },
+        }
     ]
 });

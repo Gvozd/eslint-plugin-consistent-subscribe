@@ -2,6 +2,6 @@
 
 module.exports = {
     rules: {
-        'consistent-subscribe': require('./consistent-subscribe')
+        'consistent-subscribe': require('./lib/consistent-subscribe')
     }
 };
