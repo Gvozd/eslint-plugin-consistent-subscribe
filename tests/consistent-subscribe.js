@@ -27,6 +27,13 @@ ruleTester.run('consistent-subscribe', rule, {
             `,
             options: [[{open: 'start', close: 'stop'}]]
         },
+        {
+            code: `
+                foo.start();
+                bar.stop();
+            `,
+            options: [[{open: 'start', close: 'stop', contextEquality: false}]]
+        },
         // fixed crashes
         `
             (function() {})();
@@ -52,6 +59,14 @@ ruleTester.run('consistent-subscribe', rule, {
             `,
             options: [[{open: 'start', close: 'stop'}]],
             errors: [{message: 'unpaired "start"', type: 'CallExpression'}]
+        },
+        {
+            code: `
+                foo.start();
+                bar.stop();
+            `,
+            options: [[{open: 'start', close: 'stop', contextEquality: true}]],
+            errors: [{message: 'unpaired "start"'}]
         }
     ]
 });
