@@ -29,15 +29,18 @@
     ```
 
 ### Rules
-consistent-subscribe
+#### consistent-subscribe
 **open** name of subscribe method, i.e. on/subscribe/addEventListener
+
 **close** name of unsubscribe method, i.e. off/unsubscribe/removeEventListener
+
 **contextEquality** default *true* - need check, that object strict equal
  ```js
  // failed, when contextEquality=true
  $('body').on('click', onClick);
  $(document.body).off('click', onClick);
  ```
+ 
 **openArgumentsEquality**/**closeArgumentsEquality** default *true* - arguments should strict equal
 If need check not all arguments, this is array of indexed arguments for check
  ```js
