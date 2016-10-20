@@ -34,6 +34,27 @@ ruleTester.run('consistent-subscribe', rule, {
             `,
             options: [[{open: 'start', close: 'stop', contextEquality: false}]]
         },
+        {
+            code: `
+                foo.start(bar, baz);
+                foo.stop(quux, quuux);
+            `,
+            options: [[{open: 'start', close: 'stop', openArgumentsEquality: [], closeArgumentsEquality: []}]]
+        },
+        {
+            code: `
+                foo.start(bar, baz);
+                foo.stop(bar, quux);
+            `,
+            options: [[{open: 'start', close: 'stop', openArgumentsEquality: [0], closeArgumentsEquality: [0]}]]
+        },
+        {
+            code: `
+                foo.start(bar, baz);
+                foo.stop(quux, bar);
+            `,
+            options: [[{open: 'start', close: 'stop', openArgumentsEquality: [0], closeArgumentsEquality: [-1]}]]
+        },
         // fixed crashes
         `
             (function() {})();
@@ -66,6 +87,14 @@ ruleTester.run('consistent-subscribe', rule, {
                 bar.stop();
             `,
             options: [[{open: 'start', close: 'stop', contextEquality: true}]],
+            errors: [{message: 'unpaired "start"'}]
+        },
+        {
+            code: `
+                foo.start(bar, baz);
+                foo.stop(quux);
+            `,
+            options: [[{open: 'start', close: 'stop', openArgumentsEquality: true, closeArgumentsEquality: true}]],
             errors: [{message: 'unpaired "start"'}]
         }
     ]
