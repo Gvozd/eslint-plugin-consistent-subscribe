@@ -1,5 +1,5 @@
 module.exports = {
-    "extends": "loris/es5",
+    "extends": "loris/es6",
     "root": true,
     "env": {
         "node": true,
