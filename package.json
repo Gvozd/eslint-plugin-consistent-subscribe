@@ -4,7 +4,8 @@
   "description": "ESLint rule, checking pairing subscriptions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "watch": "mocha --watch"
   },
   "repository": {
     "type": "git",
@@ -13,7 +14,11 @@
   "keywords": [
     "eslint",
     "eslint-plugin",
-    "events"
+    "eslintplugin",
+    "events",
+    "subscribes",
+    "event",
+    "subscribe"
   ],
   "author": "Gvozd",
   "license": "MIT",

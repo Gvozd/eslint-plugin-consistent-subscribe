@@ -1,6 +1,6 @@
 'use strict';
 
-const rule = require('../lib/consistent-subscribe');
+const rule = require('../../lib/rules/consistent-subscribe');
 const RuleTester = require('eslint').RuleTester;
 const ruleTester = new RuleTester();
 
