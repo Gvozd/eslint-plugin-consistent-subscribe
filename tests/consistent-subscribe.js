@@ -14,7 +14,8 @@ ruleTester.run('consistent-subscribe', rule, {
         `
             function onClick() {}
             $('body').on('click', onClick);
-            $('body').off('click', onClick);
+            $('body' )
+                .off('click',onClick);
         `,
         `
             foo.start();
