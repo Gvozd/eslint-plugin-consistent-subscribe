@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/Gvozd/eslint-plugin-consistent-subscribe#readme",
   "engines": {
-    "node": ">=5.1.0"
+    "node": ">=4.6.0"
   },
   "peerDependencies": {
     "eslint": ">=3.8.0"
