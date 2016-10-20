@@ -9,6 +9,8 @@
 [![devDependencies][dev-deps-image]][dev-deps-url]
 [![peerDependencies][peer-deps-image]][peer-deps-url]
 
+[![Downloads graph][downloads-graph-image]][downloads-url]
+
 > ESLint rule, checking pairing subscriptions
 
 ## Usage
@@ -74,5 +76,7 @@ Released under the [MIT license](https://opensource.org/licenses/MIT).
 [peer-deps-image]: https://david-dm.org/Gvozd/eslint-plugin-consistent-subscribe/peer-status.png
 [downloads-url]: https://www.npmjs.com/package/eslint-plugin-consistent-subscribe
 [downloads-image]: https://img.shields.io/npm/dm/eslint-plugin-consistent-subscribe.svg?style=flat
+[downloads-graph-image]: https://nodei.co/npm-dl/eslint-plugin-consistent-subscribe.png?months=1
+[npm-shield-image]: https://nodei.co/npm/eslint-plugin-consistent-subscribe.png
 
 [contributors]: https://github.com/Gvozd/eslint-plugin-consistent-subscribe/graphs/contributors
