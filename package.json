@@ -33,7 +33,6 @@
     "eslint-config-loris": "^6.0.0"
   },
   "dependencies": {
-    "escodegen": "^1.8.1",
-    "estraverse": "^4.2.0"
+    "escodegen": "^1.8.1"
   }
 }
