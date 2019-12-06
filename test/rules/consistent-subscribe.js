@@ -76,7 +76,10 @@ ruleTester.run('consistent-subscribe', rule, {
                 (async () => {})()
             `,
             parserOptions: {ecmaVersion: 8}
-        }
+        },
+        `
+            (foo || bar)()
+        `
     ],
     invalid: [
         {
