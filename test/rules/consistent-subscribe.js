@@ -64,7 +64,19 @@ ruleTester.run('consistent-subscribe', rule, {
         `,
         `
             foo.toString()
-        `
+        `,
+        {
+            code: `
+                (() => {})()
+            `,
+            parserOptions: {ecmaVersion: 6}
+        },
+        {
+            code: `
+                (async () => {})()
+            `,
+            parserOptions: {ecmaVersion: 8}
+        }
     ],
     invalid: [
         {
