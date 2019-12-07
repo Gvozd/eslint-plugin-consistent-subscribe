@@ -50,29 +50,53 @@ Then configure the rules you want to use under the rules section.
 
 ## Supported Rules
 ### consistent-subscribe
-**open** name of subscribe method, i.e. on/subscribe/addEventListener
 
-**close** name of unsubscribe method, i.e. off/unsubscribe/removeEventListener
+#### Rule Details
+This rule aims to...\
+Examples of **incorrect** code for this rule:
+```js
+$('body').on('click', onClick);
+// subscribe, without unsubscribe
+```
+Examples of **correct** code for this rule:
+```js
+$('body').on('click', onClick);
+setTimeout(() => {
+  $('body').off('click', onClick);
+}, 1000);
+```
 
-**contextEquality** default *true* - need check, that object strict equal
- ```js
- // failed, when contextEquality=true
- $('body').on('click', onClick);
- $(document.body).off('click', onClick);
- ```
- 
-**openArgumentsEquality**/**closeArgumentsEquality** default *true* - arguments should strict equal
-If need check not all arguments, this is array of indexed arguments for check
- ```js
- // failed, when openArgumentsEquality=true, closeArgumentsEquality=true
- $('body').on('click', onClick);
- $('body').off('click');//missing handler argument
- ```
- ```js
- // success, when openArgumentsEquality=[0], closeArgumentsEquality=[0]
- $('body').on('click', onClick);
- $('body').off('click');//missing handler argument, but it's OK
- ```
+#### Options
+This rule takes a list of objects, where each object describes a separate API subscription.\
+Default value is:
+```js
+/* eslint-enable consistent-subscribe/consistent-subscribe: [2, {open: 'addEventListener', close: 'removeEventListener'}, {open: 'on',close: 'off'}, {open: 'subscribe',close: 'unsubscribe'}] */
+```
+* **open** name of subscribe method, i.e. on/subscribe/addEventListener
+* **close** name of unsubscribe method, i.e. off/unsubscribe/removeEventListener
+* **contextEquality**. default *true* - need check, that listened object strict equal
+    The following patterns are not warnings:
+    ```js
+    /* eslint-enable consistent-subscribe/consistent-subscribe: [2, {open: 'on',close: 'off', contextEquality: false}] */
+    $('body').on('click', onClick);
+    $(document.body).off('click', onClick);
+    ```
+* **openArgumentsEquality**/**closeArgumentsEquality**. default *true* - arguments should strict equal\
+If need check not all arguments, this is array of indexed arguments for check\
+
+    The following patterns are considered warnings:
+    ```js
+    /* eslint-enable consistent-subscribe/consistent-subscribe: [2, {open: 'on',close: 'off', openArgumentsEquality: true, closeArgumentsEquality: true}] */
+    $('body').on('click', onClick);
+    $('body').off('click');//missing handler argument
+    ```
+  
+    The following patterns are not warnings:
+    ```js
+    /* eslint-enable consistent-subscribe/consistent-subscribe: [2, {open: 'on',close: 'off', openArgumentsEquality: [0], closeArgumentsEquality: [0]}] */
+    $('body').on('click', onClick);
+    $('body').off('click');//missing handler argument, but it's OK, because checked only first argument
+    ```
 
 
 ## Author
