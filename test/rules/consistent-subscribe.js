@@ -25,35 +25,35 @@ ruleTester.run('consistent-subscribe', rule, {
                 foo.start();
                 foo.stop();
             `,
-            options: [[{open: 'start', close: 'stop'}]]
+            options: [{open: 'start', close: 'stop'}]
         },
         {
             code: `
                 foo.start();
                 bar.stop();
             `,
-            options: [[{open: 'start', close: 'stop', contextEquality: false}]]
+            options: [{open: 'start', close: 'stop', contextEquality: false}]
         },
         {
             code: `
                 foo.start(bar, baz);
                 foo.stop(quux, quuux);
             `,
-            options: [[{open: 'start', close: 'stop', openArgumentsEquality: [], closeArgumentsEquality: []}]]
+            options: [{open: 'start', close: 'stop', openArgumentsEquality: [], closeArgumentsEquality: []}]
         },
         {
             code: `
                 foo.start(bar, baz);
                 foo.stop(bar, quux);
             `,
-            options: [[{open: 'start', close: 'stop', openArgumentsEquality: [0], closeArgumentsEquality: [0]}]]
+            options: [{open: 'start', close: 'stop', openArgumentsEquality: [0], closeArgumentsEquality: [0]}]
         },
         {
             code: `
                 foo.start(bar, baz);
                 foo.stop(quux, bar);
             `,
-            options: [[{open: 'start', close: 'stop', openArgumentsEquality: [0], closeArgumentsEquality: [-1]}]]
+            options: [{open: 'start', close: 'stop', openArgumentsEquality: [0], closeArgumentsEquality: [-1]}]
         },
         // fixed crashes
         `
@@ -93,7 +93,7 @@ ruleTester.run('consistent-subscribe', rule, {
             code: `
                 foo.start();
             `,
-            options: [[{open: 'start', close: 'stop'}]],
+            options: [{open: 'start', close: 'stop'}],
             errors: [{message: 'unpaired "start"', type: 'CallExpression'}]
         },
         {
@@ -101,7 +101,7 @@ ruleTester.run('consistent-subscribe', rule, {
                 foo.start();
                 bar.stop();
             `,
-            options: [[{open: 'start', close: 'stop', contextEquality: true}]],
+            options: [{open: 'start', close: 'stop', contextEquality: true}],
             errors: [{message: 'unpaired "start"'}]
         },
         {
@@ -109,8 +109,16 @@ ruleTester.run('consistent-subscribe', rule, {
                 foo.start(bar, baz);
                 foo.stop(quux);
             `,
-            options: [[{open: 'start', close: 'stop', openArgumentsEquality: true, closeArgumentsEquality: true}]],
+            options: [{open: 'start', close: 'stop', openArgumentsEquality: true, closeArgumentsEquality: true}],
             errors: [{message: 'unpaired "start"'}]
+        },
+        {
+            code: '',
+            options: [[{open: 'start', close: 'stop'}]],
+            errors: [{
+                message: 'Deprecated options format. Not need additional wrap to array. ' +
+                    'Use `\'consistent-subscribe/consistent-subscribe\': [2, {"open":"start","close":"stop"}]`'
+            }]
         }
     ]
 });
