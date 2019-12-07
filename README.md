@@ -13,23 +13,43 @@
 
 > ESLint rule, checking pairing subscriptions
 
+
+## Installation
+
+You'll first need to install [ESLint](http://eslint.org):
+```bash
+$ npm i eslint --save-dev
+```
+
+Next, install `eslint-plugin-consistent-subscribe`:
+```bash
+$ npm install eslint-plugin-consistent-subscribe --save-dev
+```
+
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-consistent-subscribe` globally.
+
 ## Usage
 
-1. Install `eslint-plugin-consistent-subscribe` as a dev-dependency:
+Add `consistent-subscribe` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+```json
+{
+    "plugins": [
+        "consistent-subscribe"
+    ]
+}
+```
 
-    ```shell
-    npm install --save-dev eslint-plugin-consistent-subscribe
-    ```
+Then configure the rules you want to use under the rules section.
+```json
+{
+    "rules": {
+        "consistent-subscribe/consistent-subscribe": 2
+    }
+}
+```
 
-2. Enable the plugin by adding it to your `.eslintrc`:
-
-    ```yaml
-    plugins:
-      - consistent-subscribe
-    ```
-
-### Rules
-#### consistent-subscribe
+## Supported Rules
+### consistent-subscribe
 **open** name of subscribe method, i.e. on/subscribe/addEventListener
 
 **close** name of unsubscribe method, i.e. off/unsubscribe/removeEventListener
