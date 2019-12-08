@@ -13,7 +13,7 @@
     "lint": "eslint lib test",
     "test": "mocha",
     "watch": "mocha --watch",
-    "prepublish": "npm run lint && npm test"
+    "prepublishOnly": "npm run lint && npm test"
   },
   "repository": {
     "type": "git",
