@@ -1,6 +1,8 @@
 # eslint-plugin-consistent-subscribe
 
 [![Build Status][travis-image]][travis-url]
+[![Actions Status][actions-CI-image]][actions-url]
+
 [![npm version][npm-image]][npm-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
@@ -111,6 +113,8 @@ Released under the [MIT license](https://opensource.org/licenses/MIT).
 
 [travis-url]: https://travis-ci.org/Gvozd/eslint-plugin-consistent-subscribe
 [travis-image]: https://img.shields.io/travis/Gvozd/eslint-plugin-consistent-subscribe.svg
+[actions-url]: https://github.com/Gvozd/eslint-plugin-consistent-subscribe/actions
+[actions-CI-image]: https://github.com/Gvozd/eslint-plugin-consistent-subscribe/workflows/CI/badge.svg
 [npm-url]: https://www.npmjs.com/package/eslint-plugin-consistent-subscribe
 [npm-image]: https://img.shields.io/npm/v/eslint-plugin-consistent-subscribe.svg
 [license-url]: https://opensource.org/licenses/MIT
