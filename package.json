@@ -1,6 +1,6 @@
 {
   "name": "@gvozd/eslint-plugin-consistent-subscribe",
-  "version": "1.2.1-3.11",
+  "version": "1.2.1-3.12",
   "description": "ESLint rule, checking pairing subscriptions",
   "main": "lib/index.js",
   "scripts": {
