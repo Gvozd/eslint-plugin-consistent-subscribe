@@ -1,8 +1,11 @@
 {
   "name": "eslint-plugin-consistent-subscribe",
-  "version": "1.2.1-4",
+  "version": "1.2.1-5",
   "description": "ESLint rule, checking pairing subscriptions",
   "main": "lib/index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "lint:ci": "eslint --cache lib test",
     "lint:commit": "eslint",
@@ -22,7 +25,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Gvozd/eslint-plugin-consistent-subscribe.git"
+    "url": "ssh://git@github.com/Gvozd/eslint-plugin-consistent-subscribe.git",
+    "directory": ""
   },
   "keywords": [
     "eslint",
