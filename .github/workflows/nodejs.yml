@@ -2,74 +2,74 @@ name: CI
 on: [push, release]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-    - name: Install
-      run: yarn install --frozen-lockfile
-    - name: Lint
-      run: yarn lint:ci
-  test:
-    needs: lint
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-    steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-    - name: Install
-      run: yarn install --frozen-lockfile
-    - name: Test
-      run: yarn test
-  compatibility:
-    needs: [lint, test]
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        eslint:
-#          - 2.0.0
-#          - 3.0.0
-#          - 3.8.0
-#          - 3.19.0
-#          - 4.0.0
-#          - 5.0.0
-          - 6.0.0
-        container:
-#          - node:4.8.0-wheezy
-#          - node:6.14.0-stretch
-#          - node:8.10.0-stretch
-#          - node:9.10.0-stretch
-#          - node:10.13.0-stretch
-          - node:11.10.1-stretch
-        exclude:
-          # Unsupported by ESLint
-          - {eslint: 5.0.0, container: 'node:4.8.0-wheezy'}
-          - {eslint: 6.0.0, container: 'node:4.8.0-wheezy'}
-          - {eslint: 6.0.0, container: 'node:6.14.0-stretch'}
-          - {eslint: 6.0.0, container: 'node:9.10.0-stretch'}
-    container:
-      image: ${{ matrix.container }}
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install ESlint & dependencies
-        run: |
-          yarn remove eslint eslint-config-loris husky lint-staged dot-json
-          yarn add --ignore-engines -D eslint@${{ matrix.eslint }}
-      - name: Used versions
-        run: node -v && yarn -v && ./node_modules/.bin/eslint -v
-      - name: Test
-        run: yarn test
+#  lint:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v1
+#    - uses: actions/setup-node@v1
+#    - name: Install
+#      run: yarn install --frozen-lockfile
+#    - name: Lint
+#      run: yarn lint:ci
+#  test:
+#    needs: lint
+#    runs-on: ${{ matrix.os }}
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        os: [ubuntu-latest]
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: Use Node.js
+#      uses: actions/setup-node@v1
+#      with:
+#        node-version: 12.x
+#    - name: Install
+#      run: yarn install --frozen-lockfile
+#    - name: Test
+#      run: yarn test
+#  compatibility:
+#    needs: [lint, test]
+#    runs-on: ubuntu-latest
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        eslint:
+##          - 2.0.0
+##          - 3.0.0
+##          - 3.8.0
+##          - 3.19.0
+##          - 4.0.0
+##          - 5.0.0
+#          - 6.0.0
+#        container:
+##          - node:4.8.0-wheezy
+##          - node:6.14.0-stretch
+##          - node:8.10.0-stretch
+##          - node:9.10.0-stretch
+##          - node:10.13.0-stretch
+#          - node:11.10.1-stretch
+#        exclude:
+#          # Unsupported by ESLint
+#          - {eslint: 5.0.0, container: 'node:4.8.0-wheezy'}
+#          - {eslint: 6.0.0, container: 'node:4.8.0-wheezy'}
+#          - {eslint: 6.0.0, container: 'node:6.14.0-stretch'}
+#          - {eslint: 6.0.0, container: 'node:9.10.0-stretch'}
+#    container:
+#      image: ${{ matrix.container }}
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Install ESlint & dependencies
+#        run: |
+#          yarn remove eslint eslint-config-loris husky lint-staged dot-json
+#          yarn add --ignore-engines -D eslint@${{ matrix.eslint }}
+#      - name: Used versions
+#        run: node -v && yarn -v && ./node_modules/.bin/eslint -v
+#      - name: Test
+#        run: yarn test
   publish:
     if: github.event_name == 'release'
-    needs: [lint, test, compatibility]
+#    needs: [lint, test, compatibility]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
