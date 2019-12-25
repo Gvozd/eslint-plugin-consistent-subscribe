@@ -17,14 +17,50 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        node-version: [8.x, 10.x, 11.x, 12.x]
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 12.x
     - name: Install
       run: yarn install --frozen-lockfile
     - name: Test
       run: yarn test
+  compatibility:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        eslint:
+          - 3.0.0
+          - 3.8.0
+          - 3.19.0
+          - 4.0.0
+          - 5.0.0
+          - 6.0.0
+        container:
+          - node:4.8.0-wheezy
+          - node:6.14.0-stretch
+          - node:8.10.0-stretch
+          - node:9.10.0-stretch
+          - node:10.13.0-stretch
+          - node:11.10.1-stretch
+        exclude:
+          # Unsupported by ESLint
+          - {eslint: 5.0.0, container: 'node:4.8.0-wheezy'}
+          - {eslint: 6.0.0, container: 'node:4.8.0-wheezy'}
+          - {eslint: 6.0.0, container: 'node:6.14.0-stretch'}
+          - {eslint: 6.0.0, container: 'node:9.10.0-stretch'}
+    container:
+      image: ${{ matrix.container }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install ESlint & dependencies
+        run: |
+          yarn remove eslint eslint-config-loris husky
+          yarn add -D eslint@${{ matrix.eslint }}
+      - name: Used versions
+        run: node -v && yarn -v && ./node_modules/.bin/eslint -v
+      - name: Test
+        run: yarn test

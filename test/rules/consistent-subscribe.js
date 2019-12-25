@@ -113,7 +113,7 @@ ruleTester.run('consistent-subscribe', rule, {
             errors: [{message: 'unpaired "start"'}]
         },
         {
-            code: '',
+            code: '// deprecated options',
             options: [[{open: 'start', close: 'stop'}]],
             errors: [{
                 message: 'Deprecated options format. Not need additional wrap to array. ' +
