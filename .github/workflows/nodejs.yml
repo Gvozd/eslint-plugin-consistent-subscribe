@@ -79,6 +79,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
 #      - run: npm run build
       - run: yarn -v
+      - run: git rev-parse --short HEAD
       - name: Publish beta
 #        if: github.event.prerelease == true
         run: npm publish
