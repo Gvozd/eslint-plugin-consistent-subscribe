@@ -11,7 +11,7 @@ jobs:
     - name: Install
       run: yarn install --frozen-lockfile
     - name: Lint
-      run: yarn lint
+      run: yarn lint:ci
   test:
     runs-on: ${{ matrix.os }}
     strategy:

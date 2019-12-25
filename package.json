@@ -3,17 +3,23 @@
   "version": "1.2.1",
   "description": "ESLint rule, checking pairing subscriptions",
   "main": "lib/index.js",
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint",
-      "pre-push": "yarn lint && yarn test"
-    }
-  },
   "scripts": {
-    "lint": "eslint lib test",
+    "lint:ci": "eslint --cache lib test",
+    "lint:commit": "eslint",
     "test": "mocha",
     "watch": "mocha --watch",
     "prepublishOnly": "npm run lint && npm test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn lint:ci && yarn test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn lint:commit"
+    ]
   },
   "repository": {
     "type": "git",
@@ -44,6 +50,7 @@
     "eslint": "^6.7.2",
     "eslint-config-loris": "^9.1.0",
     "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
     "mocha": "^6.2.2"
   },
   "dependencies": {}
