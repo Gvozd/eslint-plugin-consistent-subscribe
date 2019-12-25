@@ -58,7 +58,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Install ESlint & dependencies
         run: |
-          yarn remove eslint eslint-config-loris husky
+          yarn remove eslint eslint-config-loris husky lint-staged
           yarn add --ignore-engines -D eslint@${{ matrix.eslint }}
       - name: Used versions
         run: node -v && yarn -v && ./node_modules/.bin/eslint -v
