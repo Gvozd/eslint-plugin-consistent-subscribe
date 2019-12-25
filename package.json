@@ -1,14 +1,13 @@
 {
   "name": "eslint-plugin-consistent-subscribe",
-  "version": "1.2.1",
+  "version": "1.2.1-4",
   "description": "ESLint rule, checking pairing subscriptions",
   "main": "lib/index.js",
   "scripts": {
     "lint:ci": "eslint --cache lib test",
     "lint:commit": "eslint",
     "test": "mocha",
-    "watch": "mocha --watch",
-    "prepublishOnly": "npm run lint && npm test"
+    "watch": "mocha --watch"
   },
   "husky": {
     "hooks": {
