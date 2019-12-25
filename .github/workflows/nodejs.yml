@@ -1,6 +1,5 @@
 name: CI
-
-on: [push]
+on: [push, release]
 
 jobs:
   lint:
@@ -18,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js
@@ -30,25 +29,25 @@ jobs:
     - name: Test
       run: yarn test
   compatibility:
-    needs: test
+    needs: [lint, test]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         eslint:
-          - 2.0.0
-          - 3.0.0
-          - 3.8.0
-          - 3.19.0
-          - 4.0.0
-          - 5.0.0
+#          - 2.0.0
+#          - 3.0.0
+#          - 3.8.0
+#          - 3.19.0
+#          - 4.0.0
+#          - 5.0.0
           - 6.0.0
         container:
-          - node:4.8.0-wheezy
-          - node:6.14.0-stretch
-          - node:8.10.0-stretch
-          - node:9.10.0-stretch
-          - node:10.13.0-stretch
+#          - node:4.8.0-wheezy
+#          - node:6.14.0-stretch
+#          - node:8.10.0-stretch
+#          - node:9.10.0-stretch
+#          - node:10.13.0-stretch
           - node:11.10.1-stretch
         exclude:
           # Unsupported by ESLint
@@ -68,3 +67,25 @@ jobs:
         run: node -v && yarn -v && ./node_modules/.bin/eslint -v
       - name: Test
         run: yarn test
+  publish:
+    if: github.event_name == 'release'
+    needs: [lint, test, compatibility]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version:
+          registry-url: https://npm.pkg.github.com/
+#      - run: npm run build
+      - run: yarn -v
+      - name: Publish beta
+#        if: github.event.prerelease == true
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm}}
+#      - name: Publish stable
+##        if: github.event.prerelease == false
+#        run: npm publish --tag beta
+#        env:
+#          NODE_AUTH_TOKEN: ${{secrets.npm}}
