@@ -44,7 +44,7 @@
     "node": ">=4.8.0"
   },
   "peerDependencies": {
-    "eslint": ">=3.8.0"
+    "eslint": ">=2.0.0"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
