@@ -68,7 +68,7 @@ jobs:
 #      - name: Test
 #        run: yarn test
   publish:
-    if: github.event_name == 'release'
+#    if: github.event_name == 'release'
 #    needs: [lint, test, compatibility]
     runs-on: ubuntu-latest
     steps:
